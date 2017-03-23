@@ -5,7 +5,20 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Import Export for vPodPlayer' });
+    var uploadDir = req.app.get('uploadDir');
+    fs.readdir(uploadDir, function (err, files) {
+        var jsonFiles = [];
+        files.forEach(function (item) {
+            if(item.substr(-4) !== "json") {
+                return;
+            }
+            jsonFiles.push(item);
+        })
+        res.render('index',
+            {title: 'Import Export for vPodPlayer',
+            files: jsonFiles});
+    });
+
 });
 
 function writeJs(res, fn, data) {

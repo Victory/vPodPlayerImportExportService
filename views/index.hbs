@@ -1,2 +1,13 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+
+
+<form>
+    <select name="exportName">
+    {{#each files}}
+        <option class="row">
+            {{this}}
+        </option>
+    {{/each}}
+    </select>
+</form>
