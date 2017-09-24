@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-function writeJs(res, fn, data) {
+function writeJs(res, fn, data, exportKey) {
     fs.writeFile(fn, data, function (err) {
         if (err) {
             res.send(JSON.stringify({success: false, msg: err , data: {}}));
@@ -43,7 +43,7 @@ router.post('/', function (req, res, next) {
         if (!fs.existsSync(exportFilename)) {
             fs.openSync(exportFilename, 'w');
             var json = JSON.stringify(req.body);
-            writeJs(res, exportFilename, json);
+            writeJs(res, exportFilename, json, exportKey);
             break;
         }
     }
